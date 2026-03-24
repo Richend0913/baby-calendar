@@ -28,7 +28,10 @@ body {
   color: var(--text-main);
   line-height: 1.8;
   font-size: 16px;
+  overflow-x: hidden;
 }
+
+img { max-width: 100%; height: auto; }
 
 /* Header */
 .site-header {
