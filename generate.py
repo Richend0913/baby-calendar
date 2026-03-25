@@ -5,6 +5,7 @@ Generates 34 pages: 24 baby months (0-23) + 10 pregnancy months
 """
 import os
 import json
+from urllib.parse import quote
 
 SITE_NAME = "赤ちゃんカレンダー"
 SITE_DESC = "月齢別の赤ちゃんの成長・発達ガイド"
@@ -1687,8 +1688,7 @@ PREGNANCY_MONTHS = {
 
 def amazon_link(keywords, tag=AMAZON_TAG):
     """Generate Amazon affiliate search link."""
-    q = keywords.replace(" ", "+")
-    return f"https://www.amazon.co.jp/s?k={q}&tag={tag}"
+    return f"https://www.amazon.co.jp/s?k={quote(keywords)}&tag={tag}"
 
 
 def rakuten_link(keywords):
