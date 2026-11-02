@@ -11,6 +11,7 @@ SITE_NAME = "赤ちゃんカレンダー"
 SITE_DESC = "月齢別の赤ちゃんの成長・発達ガイド"
 SITE_URL = "https://richend0913.github.io/baby-calendar"
 ADSENSE_ID = ""  # AdSense removed: not approved (2026-11-02)
+GA_TAG = '<script async src="https://www.googletagmanager.com/gtag/js?id=G-63VB4HT3T2"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag(\'js\',new Date());gtag(\'config\',\'G-63VB4HT3T2\',{page_area:\'baby-calendar\'});</script>'
 AMAZON_TAG = "okuritegift-22"
 RAKUTEN_AFF_ID = "522e40a0.f2dc4208.522e40a1.385f875e"
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1697,6 +1698,17 @@ def rakuten_link(keywords):
     return f"https://hb.afl.rakuten.co.jp/hgc/{RAKUTEN_AFF_ID}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F{q}%2F"
 
 
+def age_product_card(name, keywords, desc, heading):
+    """Age-linked PR product card for the former ad slot ② (week/month-age pages only)."""
+    return f'''<div class="affiliate-box age-pick">
+  <span class="pr-label">広告・PR</span>
+  <h3>{heading}：{name}</h3>
+  <p>{desc}</p>
+  <a href="{amazon_link(keywords)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+  <a href="{rakuten_link(keywords)}" class="rakuten" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
+</div>'''
+
+
 def nav_html(active_page=""):
     """Generate navigation HTML."""
     links = ['<a href="../index.html">ホーム</a>']
@@ -1865,6 +1877,10 @@ def generate_baby_page(month, data):
         related_html += f'<a href="month-{next_month}.html">{BABY_MONTHS[next_month]["title"]} &raquo;</a>'
     related_html += '</div>'
 
+    # Age-linked PR card for former ad slot ② (旧枠②)
+    pick_name, pick_kw, pick_desc = data["toys"][0]
+    age_pick_html = age_product_card(pick_name, pick_kw, pick_desc, f"{title}のおすすめ")
+
     # Additional affiliate box
     extra_affiliate = f'''<div class="affiliate-box">
   <h3>📚 この時期におすすめの育児書</h3>
@@ -1876,6 +1892,7 @@ def generate_baby_page(month, data):
     html = f'''<!DOCTYPE html>
 <html lang="ja">
 <head>
+{GA_TAG}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{full_title}</title>
@@ -1910,7 +1927,7 @@ def generate_baby_page(month, data):
   {adsense_unit()}
   {physical_html}
   {mental_html}
-  {adsense_unit()}
+  {age_pick_html}
   {food_html}
   {sleep_html}
   {play_html}
@@ -1989,6 +2006,10 @@ def generate_pregnancy_page(month, data):
     related_html += f'<a href="{next_page}.html">{next_label} &raquo;</a>'
     related_html += '</div>'
 
+    # Age-linked PR card for former ad slot ② (旧枠②)
+    pick_name, pick_kw, pick_desc = data["goods"][0]
+    age_pick_html = age_product_card(pick_name, pick_kw, pick_desc, f"{title}のおすすめ")
+
     extra_affiliate = f'''<div class="affiliate-box">
   <h3>📖 おすすめのマタニティ本</h3>
   <p>初めての妊娠でも安心。妊娠期間を楽しく過ごすための一冊を。</p>
@@ -1999,6 +2020,7 @@ def generate_pregnancy_page(month, data):
     html = f'''<!DOCTYPE html>
 <html lang="ja">
 <head>
+{GA_TAG}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{full_title}</title>
@@ -2033,7 +2055,7 @@ def generate_pregnancy_page(month, data):
   {adsense_unit()}
   {baby_dev_html}
   {mama_html}
-  {adsense_unit()}
+  {age_pick_html}
   {todo_html}
   {goods_html}
   {adsense_unit()}
@@ -2094,6 +2116,7 @@ def generate_index():
     html = f'''<!DOCTYPE html>
 <html lang="ja">
 <head>
+{GA_TAG}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>

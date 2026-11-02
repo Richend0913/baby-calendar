@@ -274,6 +274,16 @@ nav.main-nav a.active {
   background: #A00000;
 }
 
+.affiliate-box .pr-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-bottom: 6px;
+}
+
 /* Ad Space */
 .ad-space {
   background: var(--warm-gray);
