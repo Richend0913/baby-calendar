@@ -10,7 +10,7 @@ from urllib.parse import quote
 SITE_NAME = "赤ちゃんカレンダー"
 SITE_DESC = "月齢別の赤ちゃんの成長・発達ガイド"
 SITE_URL = "https://richend0913.github.io/baby-calendar"
-ADSENSE_ID = "ca-pub-6327505164684489"
+ADSENSE_ID = ""  # AdSense removed: not approved (2026-11-02)
 AMAZON_TAG = "okuritegift-22"
 RAKUTEN_AFF_ID = "522e40a0.f2dc4208.522e40a1.385f875e"
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1738,15 +1738,7 @@ def footer_html():
 
 
 def adsense_unit(slot_id="auto"):
-    return f'''<div class="ad-space">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="{ADSENSE_ID}"
-       data-ad-slot="{slot_id}"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-</div>'''
+    return f''''''
 
 
 def json_ld_article(title, description, url, date_pub="2026-03-24", date_mod="2026-03-24"):
@@ -1902,7 +1894,6 @@ def generate_baby_page(month, data):
   <link rel="stylesheet" href="../css/style.css">
   <script type="application/ld+json">{json_ld_article(title, data["description"], url)}</script>
   <script type="application/ld+json">{json_ld_breadcrumb(bc_items)}</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
 </head>
 <body>
 {header_html()}
@@ -2026,7 +2017,6 @@ def generate_pregnancy_page(month, data):
   <link rel="stylesheet" href="../css/style.css">
   <script type="application/ld+json">{json_ld_article(title, data["description"], url)}</script>
   <script type="application/ld+json">{json_ld_breadcrumb(bc_items)}</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
 </head>
 <body>
 {header_html()}
@@ -2121,7 +2111,6 @@ def generate_index():
   <meta name="twitter:description" content="{desc}">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">{json_ld_site}</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
 </head>
 <body>
 {header_html()}
